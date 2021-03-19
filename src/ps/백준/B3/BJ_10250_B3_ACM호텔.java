@@ -1,10 +1,20 @@
+package ps.백준.B3;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.StringTokenizer;
+/**
+ * @since 2021. 3. 19.
+ * @author Jaewon
+ * @see
+ * @mem
+ * @time
+ * @caution
+ */
 
-public class Main {
+public class BJ_10250_B3_ACM호텔 {
 	static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	static StringBuilder output = new StringBuilder();
 	static StringTokenizer tokens;
