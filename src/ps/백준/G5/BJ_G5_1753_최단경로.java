@@ -47,8 +47,8 @@ public class BJ_G5_1753_최단경로 {
 		 * for(LinkNode node: graph) { System.out.println(node); }
 		 */
 		// 입력 종료
-		// dijkstra(K);
-		dijkstraPQ(K);
+		 dijkstra(K);
+		//dijkstraPQ(K);
 	}
 
 	static void dijkstraPQ(int start) {
