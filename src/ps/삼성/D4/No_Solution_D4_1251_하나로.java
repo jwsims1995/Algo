@@ -3,7 +3,7 @@ package ps.삼성.D4;
 import java.io.*;
 import java.util.*;
 
-public class No_Solution_D4_1251_하나로 {
+public class Solution_D4_1251_하나로 {
 	static class Node{
 		int to;
 		long weight;
