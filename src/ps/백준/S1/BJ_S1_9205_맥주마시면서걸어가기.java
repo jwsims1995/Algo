@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
  
 public class BJ_S1_9205_맥주마시면서걸어가기 {
-
+	
     public static void main(String args[]) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
         // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
