@@ -12,10 +12,25 @@ public class BJ_B1_13706_제곱근 {
 	static StringTokenizer tokens;
 	static String n;
 	public static void main(String[] args) throws NumberFormatException, IOException {
-		BigInteger N = new BigInteger(n);
+		n = input.readLine();
+		BigInteger val = new BigInteger(n);
+		BigInteger left = new BigInteger("1");
+		BigInteger two = new BigInteger("2");
+		BigInteger right = val;
+		BigInteger mid = null;
 		
+		while(left.compareTo(right) < 0) {
+			mid = left.add(right).divide(two);
+			BigInteger tmp = mid.pow(2);
+			if(val.compareTo(tmp) == 0) {
+				break;
+			}
+			
+			else if(val.compareTo(tmp) > 0) left = mid;
+			else right = mid;
+		}
 		
-		
+		System.out.println(mid);
 	}
 
 }
