@@ -18,10 +18,18 @@ public class BJ_S4_1065_한수 {
 			if(n<100) cnt++;
 			else {
 				if(n == 1000) break;
+				
+				//세자리수
+				int hund = n/100;
+				int ten = (n/10)%10;
+				int one = n%10;
+				if(hund-ten == ten-one)cnt++;
+				
 			}
 		}
+		System.out.println(cnt);
 		
 	}
 
-	static String src = "110";
+	static String src = "1000";
 }
