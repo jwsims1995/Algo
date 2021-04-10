@@ -14,7 +14,6 @@ public class BJ_S1_12026_BOJ거리 {
 	static int N;
 	static char[] road;
 	static int[] dp;
-	static char[] spell = { 'B', 'O', 'J' };
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		input = new BufferedReader(new StringReader(src));
@@ -23,51 +22,27 @@ public class BJ_S1_12026_BOJ거리 {
 		road = line.toCharArray();
 		dp = new int[N];
 		Arrays.fill(dp, Integer.MAX_VALUE);
-		dp[0] = 1;
+		dp[0] = 0;
 		// B -> O --> J
 		if(road[0] != 'B') { //첫자리가 B가 아니면 종료
 			System.out.println(-1);
 			System.exit(0);
 		}
-		int idx=1;
-		boolean flag;
-		for (int i = 1; i < N; i++) {
-			if(road[i] != spell[idx%3]) continue;
-			for (int j = i; j < N; j++) {
-				flag= true;
-				if(road[j] == spell[idx%3]) {
-					dp[i] = (int) Math.min(dp[i], dp[j] + Math.pow(j-i, 2));
-				}
-			}
-			idx++;
-		}
-		if(!flag) System.out.println(-1);
-		else System.out.println(dp[N-1]);
 		
-		
-		
-		
-		int ans = -1;
-		if (road[0] != 'B') { // 시작이 B가 아니면 -1
-			System.out.println(ans);
-			System.exit(0);
-		}
-		int idx = 0;
 		for (int i = 0; i < N; i++) {
-			for (int j = i; j < N; j++) {
-				if (spell[idx % 3] == road[j]) {
-					idx++;
-					ans += Math.pow(j-i+1, 2);
-					i=j;
-					if(i==N-1) {
-						System.out.println(ans);
-						System.exit(0);
-					}
-					break;
-				}
+			if(dp[i] == Integer.MAX_VALUE) continue;
+			for (int j = i+1; j < N; j++) {
+				if(road[i] == 'B' && road[j] == 'O')
+					dp[j] = (int) Math.min(dp[j], dp[i]+ Math.pow(j-i, 2));
+				if(road[i] == 'O' && road[j] == 'J')
+					dp[j] = (int) Math.min(dp[j], dp[i]+ Math.pow(j-i, 2));
+				if(road[i] == 'J' && road[j] == 'B')
+					dp[j] = (int) Math.min(dp[j], dp[i]+ Math.pow(j-i, 2));
 			}
 		}
-		System.out.println(-1);
+		
+		if(dp[N-1] == Integer.MAX_VALUE) System.out.println(-1);
+		else System.out.println(dp[N-1]);
 	}
 
 	static String src = "9\r\n" + 
