@@ -20,8 +20,9 @@ public class BJ_S1_12026_BOJ거리 {
 		N = Integer.parseInt(input.readLine());
 		String line = input.readLine();
 		road = line.toCharArray();
-		dp = new int[N];
+		dp = new int[N + 1];
 		Arrays.fill(dp, Integer.MAX_VALUE);
+<<<<<<< HEAD
 		dp[0] = 0;
 		// B -> O --> J
 		if(road[0] != 'B') { //첫자리가 B가 아니면 종료
@@ -43,8 +44,25 @@ public class BJ_S1_12026_BOJ거리 {
 		
 		if(dp[N-1] == Integer.MAX_VALUE) System.out.println(-1);
 		else System.out.println(dp[N-1]);
+=======
+		dp[1] = 1;
+		for (int i = 2; i <= N; i++) {
+			for (int j = 1; j <= i; j++) {
+				if (road[i - 1] == 'B' && road[i] == 'O')
+					dp[i] = (int) Math.min(dp[i], dp[i - j] + Math.pow(i - j, 2));
+				else if (road[i - 1] == 'O' && road[i] == 'J')
+					dp[i] = (int) Math.min(dp[i], dp[i - j] + Math.pow(i - j, 2));
+				else if (road[i - 1] == 'J' && road[i] == 'B')
+					dp[i] = (int) Math.min(dp[i], dp[i - j] + Math.pow(i - j, 2));
+				else if(road[i-1] == road[i])
+					dp[i] = dp[i - 1] + 1;
+				
+			}
+			System.out.println(dp[i]);
+		}
+		System.out.println(dp[N]);
+>>>>>>> branch 'master' of https://github.com/jwsims1995/Algo.git
 	}
 
-	static String src = "9\r\n" + 
-			"BOJBOJBOJ";
+	static String src = "9\r\n" + "BOJBOJBOJ";
 }
