@@ -68,7 +68,7 @@ public class Solution_1953_탈주범검거 {
 						queue.offer(new int[] { nr, nc });
 						visited[nr][nc] = true;
 						++result;
-					} 
+					}
 				}
 			}
 
