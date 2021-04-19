@@ -21,7 +21,6 @@ public class Solution_5656_벽돌깨기 {
 			this.c = c;
 			this.cnt = cnt;
 		}
-
 	}
 
 	static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -45,15 +44,12 @@ public class Solution_5656_벽돌깨기 {
 					map[h][w] = Integer.parseInt(tokens.nextToken());
 				}
 			} // 입력 완료
-
 			min = Integer.MAX_VALUE;
 			go(0, map); // 구슬떨어뜨리기
 			output.append("#" + t + " " + min + "\n");
 		}
 		System.out.println(output);
-
 	}
-
 	// 중복순열로 구슬 떨어뜨리기
 	private static void go(int cnt, int[][] map) { // cnt : 구슬을 떨어뜨린 횟수
 		
