@@ -35,44 +35,29 @@ public class Solution_1249_보급로 {
 		}
 		System.out.println(output);
 	}
-	
-	
-	
 
-private static String bfs(int i, int j) {
-	Queue<Point> queue = new LinkedList<>();
-	queue.offer(new Point(i,j));
-	visited = new boolean[N][N];
-	visited[i][j] = true;
-	while(!queue.isEmpty()) {
-		Point p = queue.poll();
-		visited[p.x][p.y] = true;
-		for (int d = 0; d < deltas.length; d++) {
-			int nr = p.x + deltas[d][0];
-			int nc = p.y + deltas[d][1];
-			
-			if(!isIn(nr,nc) && visited[nr][nc]) continue;
-			
+	private static int bfs(int i, int j) {
+		PriorityQueue<Point2> queue = new PriorityQueue<>();
+		queue.offer(new Point2(i, j, 0));
+		visited = new boolean[N][N];
+		visited[i][j] = true;
+		while (!queue.isEmpty()) {
+			Point2 p = queue.poll();
+			if (p.x == N - 1 && p.y == N - 1)
+				return p.cnt;
+
+			for (int d = 0; d < deltas.length; d++) {
+				int nr = p.x + deltas[d][0];
+				int nc = p.y + deltas[d][1];
+
+				if (!isIn(nr, nc) || visited[nr][nc])
+					continue;
+				queue.offer(new Point2(nr, nc, p.cnt + map[nr][nc]));
+				visited[nr][nc] = true;
+			}
 		}
-		
+		return -1;
 	}
-	
-	return null;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //	private static boolean bfs1(int x, int y) {
 //		Queue<Point> queue = new LinkedList<>();
@@ -106,7 +91,7 @@ private static String bfs(int i, int j) {
 		Queue<Point> queue = new LinkedList<>();
 		visited = new boolean[N][N];
 		visited[x][y] = true;
-
+		int cnt = 0;
 		queue.offer(new Point(x, y));
 		int res = 0; // 이동거리
 
@@ -190,6 +175,7 @@ private static String bfs(int i, int j) {
 		}
 
 		@Override
+
 		public int compareTo(Point2 o) {
 			return Integer.compare(cnt, o.cnt); // 오름차순
 			// return Integer.compare(o.cnt, cnt); // 내림차순
