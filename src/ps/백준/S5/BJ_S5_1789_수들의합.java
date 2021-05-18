@@ -14,9 +14,11 @@ public class BJ_S5_1789_수들의합 {
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		S = Long.parseLong(input.readLine());
+		
 		long sum = 0;
 		int ans = 0;
 		int idx = 1;
+		
 		while (S > sum) {
 			sum += idx++;
 		}
