@@ -27,7 +27,7 @@ public class BJ_S1_11052_카드구매하기 {
 		for (int n = 1; n <= N; n++) {
 			for (int p = 1; p <= n; p++) {				
 				max[n] = Math.max(max[n], max[n-p] + P[p]);
-				System.out.println("n: "+n +" "+ max[n]);
+				//System.out.println("n: "+n +" "+ max[n]);
 			}
 		}
 		System.out.println(max[N]);
