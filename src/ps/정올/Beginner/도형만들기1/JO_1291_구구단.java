@@ -1,4 +1,4 @@
-package ps.정올.Beginner;
+package ps.정올.Beginner.도형만들기1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
