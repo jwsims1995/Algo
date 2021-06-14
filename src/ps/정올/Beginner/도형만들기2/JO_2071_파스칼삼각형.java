@@ -13,16 +13,12 @@ public class JO_2071_파스칼삼각형 {
 	static StringBuilder output = new StringBuilder();
 	static StringTokenizer tokens;
 	static int N, M;
-
+	static int[][] map;
 	public static void main(String[] args) throws IOException {
 		tokens = new StringTokenizer(input.readLine());
 		N = Integer.parseInt(tokens.nextToken());
 		M = Integer.parseInt(tokens.nextToken());
-
-		if (!isIn(N, M)) {
-			System.out.println("INPUT ERROR!");
-			System.exit(0);
-		}
+		map = new int[N][N];
 		switch (M) {
 		case 1:
 			sol1();
@@ -38,55 +34,82 @@ public class JO_2071_파스칼삼각형 {
 	}
 
 	private static void sol3() {
-		boolean flag = false;
-		for (int i = 1; i <= N; i++) {
-			if (i == N / 2 + 2)
-				flag = true;
-			
-			if (!flag) {
-				for (int j = 1; j <= i; j++) {
-					System.out.printf("%d ", j);
-				}
-			} else {
-				for (int j = 1; j <= N-i+1; j++) {
-					System.out.printf("%d ", j);
-				}
+		for (int r = 0; r < N; r++) {
+			for (int c = 0; c < N; c++) {
+				if(r == N-1 || r==c) map[r][c] = 1;				
+			}
+		}
+		for (int r = N-1; r >= 0; r--) {
+			for (int c = N-1; c >= 0; c--) {
+				if(isExist3(r,c)){
+					map[r][c] = map[r+1][c+1] + map[r][c+1];
+				}				
+			}
+		}
+		
+		for (int r = 0; r < N; r++) {
+			for (int c = 0; c < N; c++) {
+				if(map[r][c] == 0) break;
+				System.out.printf("%d ", map[r][c]);
 			}
 			System.out.println();
 		}
 	}
 
 	private static void sol2() {
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < i*2; j++) {
-				System.out.printf(" ");
+		for (int r = 0; r < N; r++) {
+			for (int c = 0; c < N; c++) {
+				if(c == N-1 || r==c) map[r][c] = 1;				
 			}
-			for (int j = 0; j < (N - i) * 2 - 1; j++) {
-				System.out.printf("%d ", i);
+		}
+		for (int r = N-1; r >= 0; r--) {
+			for (int c = N-1; c >= 0; c--) {
+				if(isExist2(r,c)){
+					map[r][c] = map[r+1][c+1] + map[r+1][c];
+				}				
+			}
+		}
+		
+		for (int r = 0; r < N; r++) {
+			for (int c = 0; c < N; c++) {
+				if(map[r][c] == 0)System.out.printf(" ");
+				else System.out.printf("%d ", map[r][c]);
 			}
 			System.out.println();
 		}
 	}
 
 	private static void sol1() {
-		int cnt = 1;
-		int tmp = 0;
-		for (int i = 1; i <= N; i++) {
-			for (int j = 0; j < i; j++) {
-				if (i % 2 != 0) {
-					System.out.printf("%d ", cnt++);
-					tmp = cnt + i;
-				} else {
-					System.out.printf("%d ", tmp--);
-					cnt = tmp + i + 1;
-				}
+		for (int r = 0; r < N; r++) {
+			for (int c = 0; c < N; c++) {
+				if(c == 0 || r==c) map[r][c] = 1;				
+			}
+		}
+		for (int r = 0; r < N; r++) {
+			for (int c = 0; c < N; c++) {
+				if(isExist1(r,c)){
+					map[r][c] = map[r-1][c-1] + map[r-1][c];
+				}				
+			}
+		}
+		
+		for (int r = 0; r < N; r++) {
+			for (int c = 0; c < N; c++) {
+				if(map[r][c] == 0) break;
+				System.out.printf("%d ",map[r][c]);
 			}
 			System.out.println();
 		}
-
+		
 	}
 
-	private static boolean isIn(int n, int m) {
-		return 1 <= n && n <= 100 && n % 2 != 0 && 1 <= m && m <= 3;
+	private static boolean isExist1(int r, int c) {
+		return 0<=r-1 && r-1<N && 0<= c-1 && c-1<N && map[r-1][c-1] != 0 && map[r-1][c] !=0 ;
+	}
+	private static boolean isExist2(int r, int c) {
+		return 0<=r+1 && r+1<N && 0<= c+1 && c+1<N && map[r+1][c+1] != 0 && map[r+1][c] !=0 ;
+	}
+	private static boolean isExist3(int r, int c) {
+		return 0<=r+1 && r+1<N && 0<= c+1 && c+1<N && map[r+1][c+1] != 0 && map[r][c+1] !=0 ;
 	}
 }
