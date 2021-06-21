@@ -1,20 +1,17 @@
-package ps.백준.B1;
+package ps.백준.S4;
 
-import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class BJ_B1_1592_영식이와친구들2 {
+public class BJ_S4_16956_늑대와양 {
 	static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	static StringBuilder output = new StringBuilder();
 	static StringTokenizer tokens;
 	static int R,C;
+	static int canGo = 1;
 	static char[][] map;
 	static int[][] deltas=  {{-1,0},{1,0},{0,1},{0,-1}};
 	public static void main(String[] args) throws NumberFormatException, IOException {
@@ -26,35 +23,43 @@ public class BJ_B1_1592_영식이와친구들2 {
 		for (int r = 0; r < R; r++) {
 			map[r] = input.readLine().toCharArray();
 		}
-		for (int r = 0; r < R; r++) {
-			for (int c = 0; c < C; c++) {
-				if(map[r][c] == 'W')bfs(r,c);
+//		for (char[] row : map) {
+//			System.out.println(Arrays.toString(row));
+//		}
+		for (int r = 0; r < R && canGo == 1; r++) {
+			for (int c = 0; c < C && canGo==1; c++) {
+				if(map[r][c] == 'S') defense(r,c);
 			}
 		}
-		
-		for (char[] row : map) {
-			System.out.println(Arrays.toString(row));
+		if(canGo==1) {
+			output.append(canGo).append("\n");
+			for (int r = 0; r < R; r++) {
+				for (int c = 0; c < C; c++) {
+					output.append(map[r][c]);
+				}
+				output.append("\n");
+			}
+			System.out.println(output);
+		}
+		else {
+			System.out.println(canGo);
 		}
 		
 	}
-	static void bfs(int r, int c) {
-		Queue<Point> queue = new LinkedList<Point>();
-		queue.add(new Point(r,c));
-		while(!queue.isEmpty()) {
-			Point p = queue.poll();
-			for (int d = 0; d < deltas.length; d++) {
-				int nr = p.x + deltas[d][0];
-				int nc = p.y + deltas[d][1];
-				if(isIn(nr,nc) && map[nr][nc] == '.') {
-					queue.add(new Point(nr,nc));
-				}
-				if(isIn(nr,nc) && map[nr][nc] == 'S' && map[p.x][p.y]=='.') {
-					map[p.x][p.y] = 'D';
-				}
+
+	private static void defense(int r, int c) {
+		for (int d = 0; d < deltas.length; d++) {
+			int nr = r + deltas[d][0];
+			int nc = c + deltas[d][1];
+			if(isIn(nr,nc)) {
+				if(map[nr][nc] == '.')
+					map[nr][nc] = 'D';
+				else if(map[nr][nc] =='W')
+					canGo = 0;
 			}
-			
 		}
 	}
+
 	private static boolean isIn(int r, int c) {
 		return 0<=r && r<R && 0<=c && c<C;
 	}
