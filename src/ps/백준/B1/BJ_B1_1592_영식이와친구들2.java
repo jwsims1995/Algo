@@ -1,18 +1,16 @@
-package ps.정올.Beginner.여러가지;
+package ps.백준.B1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class JO_1311_카드게임 {
-
+public class BJ_B1_1592_영식이와친구들2 {
 	static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	static StringBuilder output = new StringBuilder();
 	static StringTokenizer tokens;
-	static int T ,R, C, ans;
-	
-	public static void main(String[] args) throws IOException {
+
+	public static void main(String[] args) throws NumberFormatException, IOException {
 		
 	}
 }

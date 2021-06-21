@@ -26,7 +26,7 @@ public class BJ_S4_11866_요세푸스문제0 {
 		LinkedList<Integer> LinkedList = new LinkedList<Integer>();
 		for (int i = 1; i <= N; i++) LinkedList.add(i);
 		
-		//System.out.println(LinkedList);//입력확인
+		System.out.println(LinkedList);//입력확인
 		output.append("<");
 		while(LinkedList.size() > 1) {
 			for (int i = 0; i < K-1; i++) {
