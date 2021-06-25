@@ -4,42 +4,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.util.StringTokenizer;
-
-public class BJ_G4_2638_치즈 {
-	static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-	static StringBuilder output = new StringBuilder();
-	static StringTokenizer tokens;
-	static int N,M;
-	public static void main(String[] args) throws IOException {
-		input= new BufferedReader(new StringReader(src));
-		tokens = new StringTokenizer(input.readLine());
-		N = Integer.parseInt(tokens.nextToken()); // 세로
-		M = Integer.parseInt(tokens.nextToken()); // 가로
-		
-	}
-	private static String src = "8 9\r\n" +
-			"0 0 0 0 0 0 0 0 0\r\n" +
-			"0 0 0 1 1 0 0 0 0\r\n" +
-			"0 0 0 1 1 0 1 1 0\r\n" +
-			"0 0 1 1 1 1 1 1 0\r\n" +
-			"0 0 1 1 1 1 1 0 0\r\n" +
-			"0 0 1 1 0 1 1 0 0\r\n" +
-			"0 0 0 0 0 0 0 0 0\r\n" +
-			"0 0 0 0 0 0 0 0 0";
-}
-
-
-
-
-/*import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
+/**
+ * @author 은서파
+ * @since 2021. 3. 24.
+ * @see
+ * @mem
+ * @time
+ * @caution [고려사항] [입력사항] [출력사항]
+ */
 public class BJ_G4_2638_치즈 {
 	static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	static StringBuilder output = new StringBuilder();
@@ -158,6 +134,4 @@ public class BJ_G4_2638_치즈 {
 			"0 0 1 1 0 1 1 0 0\r\n" +
 			"0 0 0 0 0 0 0 0 0\r\n" +
 			"0 0 0 0 0 0 0 0 0";
-}*/
-
-
+}
