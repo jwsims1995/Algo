@@ -14,43 +14,47 @@ public class BJ_G4_1520_내리막길 {
 	static int T, M, N, ans; // 입력
 	static int[][] map; // 이차원배열 map 선언
 	static int[][] deltas = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } }; // 사방 탐색을 위한 deltas 설정
-
+	static int[][] dp;
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		input = new BufferedReader(new StringReader(src)); // String src를 이용해서 미리
 		// 입력받은 입력값을 input으로 설정
-		ans = 0; // 다음 테스트케이스를 위한 ans 초기화
 		tokens = new StringTokenizer(input.readLine());
 		M = Integer.parseInt(tokens.nextToken()); // 500 이하 세로 크기
 		N = Integer.parseInt(tokens.nextToken()); // 500 이하 가로 크기
 		map = new int[M][N]; // 10000 이하의 높이 map 생성
+		dp = new int[M][N];
 		for (int m = 0; m < M; m++) {
 			tokens = new StringTokenizer(input.readLine());
 			for (int n = 0; n < N; n++) {
 				map[m][n] = Integer.parseInt(tokens.nextToken()); // map 입력받기
+				dp[m][n] = -1;
 			}
 		}
 //		for (int[] row : map) {
 //			System.out.println(Arrays.toString(row));
 //		} // 입력확인
 
-		dfs(0, 0);
 
-		System.out.println(ans); // ans 출력
+		System.out.println(dfs(0,0)); // ans 출력
 	}
 
-	static void dfs(int r, int c) {
+	static int dfs(int r, int c) {
 		if (r == M - 1 && c == N - 1) { // 오른쪽 맨 아래인 map(M-1, N-1) 로 도착하면 ans++하고 return
-			ans++;
-			return;
+			return 1;
 		}
-		// 사방탐색했을때 내리막길이면 간다.
-		for (int d = 0; d < deltas.length; d++) { // 미리 설정해놓은 deltas를 이용해서 사방탐색
-			int nr = r + deltas[d][0];
-			int nc = c + deltas[d][1];
-			if (isIn(nr, nc) && map[r][c] > map[nr][nc]) { // nr,nc가 범위에 들고, 내리막길이면 dfs 재귀를 통해 거기로 간다.
-				dfs(nr, nc);
+		if(dp[r][c] != -1) return dp[r][c];
+		else {
+			dp[r][c] = 0;
+			// 사방탐색했을때 내리막길이면 간다.
+			for (int d = 0; d < deltas.length; d++) { // 미리 설정해놓은 deltas를 이용해서 사방탐색
+				int nr = r + deltas[d][0];
+				int nc = c + deltas[d][1];
+				if (isIn(nr, nc) && map[r][c] > map[nr][nc]) { // nr,nc가 범위에 들고, 내리막길이면 dfs 재귀를 통해 거기로 간다.
+					dp[r][c] += dfs(nr, nc);
+				}
 			}
 		}
+		return dp[r][c];
 	}
 
 	static boolean isIn(int nr, int nc) { // isIn함수로 이차원 배열 범위 내에 있는지 확인
