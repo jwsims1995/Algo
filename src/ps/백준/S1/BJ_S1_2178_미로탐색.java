@@ -46,7 +46,7 @@ public class BJ_S1_2178_미로탐색 {
 				int nr = p.r + deltas[d][0];
 				int nc = p.c + deltas[d][1];
 				
-				if(isIn(nr,nc)&&!visit[nr][nc] && map[nr][nc] == 1) {
+				if(isIn(nr,nc)&& !visit[nr][nc] && map[nr][nc] == 1) {
 					
 						queue.offer(new Point(nr,nc));
 						map[nr][nc] = map[p.r][p.c] + 1; 
