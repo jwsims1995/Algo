@@ -34,25 +34,23 @@ public class BJ_S5_10814_나이순정렬comparable {
 	static StringBuilder output = new StringBuilder();
 	static StringTokenizer tokens;
 	static int N;
-	static Member[] members;
+	static PriorityQueue<Member> pq = new PriorityQueue<>();
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		input = new BufferedReader(new StringReader(src));
 		N = Integer.parseInt(input.readLine());
-		members = new Member[N];
 		for(int n = 0; n<N; n++) {
 			tokens = new StringTokenizer(input.readLine());
 			Member member = new Member(Integer.parseInt(tokens.nextToken()), tokens.nextToken(), n);
-			members[n] = member;
+			pq.add(member);
 		}
 //		for (int i = 0; i < members.length; i++) {
 //			output.append(members[i].age).append(" ").append(members[i].name).append("\n");
 //		}
 //		output.append("\n");
-		Arrays.sort(members);
-		for (int i = 0; i < members.length; i++) {
-			output.append(members[i].age).append(" ").append(members[i].name).append("\n");
+		while(!pq.isEmpty()) {
+			Member p = pq.poll();
+			output.append(p.age).append(" ").append(p.name).append("\n");
 		}
-		output.append("\n");
 		System.out.println(output);
 	}
 	static String src ="3\r\n" + 

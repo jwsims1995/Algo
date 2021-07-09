@@ -13,7 +13,7 @@ import java.util.*;
 
 public class BJ_S5_10814_나이순정렬comparator {
 	
-	static class Member implements Comparable<Member>{
+	static class Member{
 		int age;
 		String name;
 		int order;
@@ -23,18 +23,19 @@ public class BJ_S5_10814_나이순정렬comparator {
 			this.name = name;
 			this.order = order;
 		}
-
-		@Override
-		public int compareTo(Member o) {
-			if(o.age == this.age) return this.order - o.order;
-			return Integer.compare(this.age, o.age);
-		}
 	}
 	static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	static StringBuilder output = new StringBuilder();
 	static StringTokenizer tokens;
 	static int N;
-	static PriorityQueue<Member> pq = new PriorityQueue<>();
+	static PriorityQueue<Member> pq = new PriorityQueue<>(new Comparator<Member>() {
+		@Override
+		public int compare(Member o1, Member o2) {
+			if(o1.age == o2.age) return o1.order - o2.order;
+			return o1.age - o2.age;
+		}
+
+	});
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		input = new BufferedReader(new StringReader(src));
 		N = Integer.parseInt(input.readLine());
