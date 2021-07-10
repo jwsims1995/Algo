@@ -30,30 +30,36 @@ public class BJ_S1_1992_쿼드트리 {
 		System.out.println(output);
 	}
 
-	private static void divide(int r, int c, int l) {
-		if (isFull(r, c, l)) {
+
+
+	private static void divide(int r, int c, int n) {
+		//시작점 r,c
+		
+		//만약 모든 색이 동일하다면 return;
+		if(isSame(r,c,n)) {
 			output.append(map[r][c]);
 			return;
 		}
+		// 4개로 나눈다.
 		output.append("(");
-		int m = l/2;
-		divide(r, c, m);
-		divide(r, c + m, m);
-		divide(r + m, c, m);
-		divide(r + m, c +m, m);
+		int m = n/2;
+		divide(r,c,m);
+		divide(r,c+m,m);
+		divide(r+m,c,m);
+		divide(r+m,c+m,m);
 		output.append(")");
-
 	}
 
-	private static boolean isFull(int r, int c, int l) {
-		for (int i = r; i < r + l; i++) {
-			for (int j = c; j < c + l; j++) {
-				if (map[r][c] != map[i][j])
-					return false;
+	private static boolean isSame(int r, int c, int n) {
+		for (int i = r+1; i < r+n; i++) {
+			for (int j = c+1; j < c+n; j++) {
+				if(map[r][c] != map[i][j])return false;
 			}
 		}
 		return true;
 	}
+
+
 
 	private static String src = "8\r\n" + "11110000\r\n" + "11110000\r\n" + "00011100\r\n" + "00011100\r\n"
 			+ "11110000\r\n" + "11110000\r\n" + "11110011\r\n" + "11110011";

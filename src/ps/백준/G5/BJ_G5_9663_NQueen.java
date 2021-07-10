@@ -12,35 +12,45 @@ public class BJ_G5_9663_NQueen {
 	static StringBuilder output = new StringBuilder();
 	static StringTokenizer tokens;
 	static int N, cnt;
-	static int[] map;
+	static int[] col;
 	static int[][] deltas = {{0,1},{1,0},{-1,0},{0,-1},{1,1},{1,-1},{-1,1},{-1,-1}};
 	public static void main(String[] args) throws IOException {
 		input = new BufferedReader(new StringReader(src));
 		N = Integer.parseInt(input.readLine());
-		map = new int[N];
+		col = new int[N+1];
 		
 		nQueen(0);
+		System.out.println(cnt);
 	}
 
 
-	private static void nQueen(int depth) {
-		if(depth == N) {
+	private static void nQueen(int row) {
+		if(!isAvailable(row)) {
+			return;
+		}
+		
+		if(row == N) {
 			cnt++;
 			return;
 		}
 		
-		for (int i = 0; i < N; i++) {
-			map[depth] = i;
-			if(isPossible(depth)) {
-				nQueen(depth+1);
-			}
+		for (int i = 1; i <= N; i++) {
+			col[row+1] = i;
+			nQueen(row+1);
+
 		}
 	}
 
-
-	private static boolean isPossible(int depth) {
-		return ;
+	private static boolean isAvailable(int row) {
+		for (int i = 1; i < row; i++) {
+			if(col[i] == col[row] || Math.abs(col[i] - col[row]) == row - i) {
+				return false;
+			}
+		}
+		return true;
 	}
+
+
 
 
 	private static String src = "8";
