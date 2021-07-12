@@ -54,15 +54,15 @@ public class BJ_G5_2589_보물섬 {
 	}
 	
 	private static int bfs(int r, int c) {
-		visited = new boolean[ROW][COL];
-		visited[r][c] = true;
 		Queue<Point> q = new LinkedList<>();
 		q.offer(new Point(r,c));
+		visited = new boolean[ROW][COL];
+		visited[r][c] = true;
 		int cnt = 0;
 
 		while(!q.isEmpty()) {
 			int size = q.size();
-			for (int p = 0; p < size; p++) {
+			while(size-->0) {
 				Point P = q.poll();
 				for (int d = 0; d < deltas.length; d++) {
 					int nr = P.r + deltas[d][0];
@@ -82,13 +82,11 @@ public class BJ_G5_2589_보물섬 {
 		return r>=0 && r<ROW && c>=0 && c<COL;
 	}
 
-	static String src = "7 7\r\n" + 
-			"WLLLLLW\r\n" + 
+	static String src = "5 7\r\n" + 
+			"WLLWWWL\r\n" + 
+			"LLLWLLL\r\n" + 
 			"LWLWLWW\r\n" + 
-			"LLLWLWW\r\n" + 
-			"LWWWLWW\r\n" + 
-			"LLLLLWW\r\n" + 
-			"LWWWWWW\r\n" + 
-			"WWWWWWW";
+			"LWLWLLL\r\n" + 
+			"WLLWLWW";
 }
 
