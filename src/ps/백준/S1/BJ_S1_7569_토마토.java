@@ -4,101 +4,122 @@ import java.io.*;
 import java.util.*;
 
 public class BJ_S1_7569_토마토 {
-	static class Point{
-		int r,c;
-		
-		public Point(int r, int c) {
+	static class Point {
+		int r, c, h;
+
+		public Point(int h, int r, int c) {
 			this.r = r;
 			this.c = c;
+			this.h = h;
 		}
 	}
+
 	static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer tokens;
-	static StringBuilder output =new StringBuilder();
-	static int R, C, K, cnt, num;
-	static int[][] map;
-	static boolean[][] visited;
-	static int[][] deltas = {{1,0},{-1,0},{0,1},{0,-1}};
+	static StringBuilder output = new StringBuilder();
+	static int M, N, H, cnt, num;
+	static int[][][] map;
+	static boolean[][][] visited;
+	static int[][] deltas = { { 0, 0, 1 }, { 0, 0, -1 }, { 0, 1, 0 }, { 0, -1, 0 }, { 1, 0, 0 }, { -1, 0, 0 } };
 	static List<Integer> list = new ArrayList<>();
+	static Queue<Point> queue;
+
 	public static void main(String[] args) throws IOException {
 		input = new BufferedReader(new StringReader(src));
 		tokens = new StringTokenizer(input.readLine());
-		R = Integer.parseInt(tokens.nextToken());
-		C = Integer.parseInt(tokens.nextToken());
-		K = Integer.parseInt(tokens.nextToken());
-		map= new int[R][C];
-		visited= new boolean[R][C];
-		
-		for (int k = 0; k < K; k++) {
-			tokens = new StringTokenizer(input.readLine());
-			int c1 = Integer.parseInt(tokens.nextToken());
-			int r1 = Integer.parseInt(tokens.nextToken());
-			int c2 = Integer.parseInt(tokens.nextToken());
-			int r2 = Integer.parseInt(tokens.nextToken());
-			
-			for (int r = r1; r < r2; r++) {
-				for (int c = c1; c < c2; c++) {
-					map[r][c] = -1;
+		M = Integer.parseInt(tokens.nextToken());
+		N = Integer.parseInt(tokens.nextToken());
+		H = Integer.parseInt(tokens.nextToken());
+		map = new int[H][N][M];
+		visited = new boolean[H][N][M];
+
+		queue = new LinkedList<>();
+
+		boolean canDo = false;
+
+		for (int h = 0; h < H; h++) {
+			for (int r = 0; r < N; r++) {
+				tokens = new StringTokenizer(input.readLine());
+				for (int c = 0; c < M; c++) {
+					map[h][r][c] = Integer.parseInt(tokens.nextToken());
+					if (map[h][r][c] == 0)
+						canDo = true;
 				}
 			}
 		}
-		//입력
-//		for (int[] row : map) {
-//			System.out.println(Arrays.toString(row));
+
+		if (!canDo) {
+			System.out.println(0);
+			System.exit(0);
+		}
+//		// 출력
+//		for (int[][] col : map) {
+//			for (int[] row : col) {
+//				System.out.println(Arrays.toString(row));
+//			}
 //		}
-//		System.out.println();
-		
-		for (int r = 0; r < R; r++) {
-			for (int c = 0; c < C; c++) {
-				if(map[r][c] == 0 && !visited[r][c]) {
-					cnt++;
-					bfs(r,c);
-					list.add(num);
-					
-//					for (int[] row : map) {
-//						System.out.println(Arrays.toString(row));
-//					}
-//					
-//					System.out.println();
-				}
-			}
-		}
-		Collections.sort(list);
-		
-		output.append(cnt).append("\n");
-		for (int i = 0; i < list.size(); i++) {
-			output.append(list.get(i)).append(" ");
-		}
-		System.out.println(output);
-	}
-	private static void bfs(int r, int c) {
-		num = 1;
-		Queue<Point> queue = new LinkedList<>();
-		queue.add(new Point(r,c));
-		visited[r][c] = true;
-		map[r][c] = cnt;
-		while(!queue.isEmpty()) {
-			Point p = queue.poll();
-			for (int d = 0; d < deltas.length; d++) {
-				int nr = p.r + deltas[d][0];
-				int nc = p.c + deltas[d][1];
-				if(isIn(nr,nc) && !visited[nr][nc] && map[nr][nc] == 0) {
-					queue.add(new Point(nr,nc));
-					map[nr][nc] = cnt;
-					visited[nr][nc] = true;
-					num++;
-				}
-			}
-		}
-	}
-	private static boolean isIn(int r, int c) {
-		return r>=0 && r<R && c>=0 && c<C;
-	}
-	static String src = "5 7 3\n" + 
-			"0 2 4 4\n" + 
-			"1 1 2 5\n" + 
-			"4 0 6 2";
 
-	
+		for (int h = 0; h < H; h++) {
+			for (int r = 0; r < N; r++) {
+				for (int c = 0; c < M; c++) {
+					if (!visited[h][r][c] && map[h][r][c] == 1) {
+						queue.add(new Point(h, r, c));
+						visited[h][r][c] = true;
+					}
+				}
+			}
+		}
+
+		bfs();
+
+		if (!allGood()) {
+			System.out.println(-1);
+
+		} else {
+			System.out.println(--cnt);
+		}
+	}
+
+	private static void bfs() {
+		while (!queue.isEmpty()) {
+			int size = queue.size();
+			while (size-- > 0) {
+				Point p = queue.poll();
+				
+				for (int d = 0; d < deltas.length; d++) {
+					int nr = p.r + deltas[d][0];
+					int nc = p.c + deltas[d][1];
+					int nh = p.h + deltas[d][2];
+					if (isIn(nr, nc, nh) && !visited[nh][nr][nc] && map[nh][nr][nc] == 0) {
+						queue.add(new Point(nh, nr, nc));
+						map[nh][nr][nc] = 1;
+						visited[nh][nr][nc] = true;
+
+					}
+				}
+			}
+			cnt++;
+		}
+
+	}
+
+	private static boolean allGood() {
+		for (int h = 0; h < H; h++) {
+			for (int r = 0; r < N; r++) {
+				for (int c = 0; c < M; c++) {
+					if (map[h][r][c] == 0)
+						return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	private static boolean isIn(int r, int c, int h) {
+		return r >= 0 && r < N && c >= 0 && c < M && h >= 0 && h < H;
+	}
+
+	static String src = "5 3 2\n" + "0 0 0 0 0\n" + "0 0 0 0 0\n" + "0 0 0 0 0\n" + "0 0 0 0 0\n" + "0 0 1 0 0\n"
+			+ "0 0 0 0 0";
+
 }
-
