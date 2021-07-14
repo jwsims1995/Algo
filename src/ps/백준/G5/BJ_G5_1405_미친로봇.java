@@ -13,6 +13,7 @@ public class BJ_G5_1405_미친로봇 {
 	static int N;
 	static int[][] deltas = {{0,1},{0,-1},{-1,0},{1,0}}; //동서남북
 	static int[] percent = new int[4];
+	static int[][] map;
 	public static void main(String[] args) throws IOException {
 		input = new BufferedReader(new StringReader(src));
 		tokens = new StringTokenizer(input.readLine());
@@ -20,7 +21,9 @@ public class BJ_G5_1405_미친로봇 {
 		for(int i=0; i<4; i++){
 			percent[i] = Integer.parseInt(tokens.nextToken());
 		}
-
+		map = new int[N][N];
+		
+		
 	}
 
 
