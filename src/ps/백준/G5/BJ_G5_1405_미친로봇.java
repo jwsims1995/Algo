@@ -11,10 +11,11 @@ public class BJ_G5_1405_미친로봇 {
 	static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	static StringBuilder output = new StringBuilder();
 	static StringTokenizer tokens;
-	static int N, total, cnt;
+	static int N;
+	static double result;
 	static int[][] deltas = {{0,1},{0,-1},{-1,0},{1,0}}; //동서남북
 	static int[] percent = new int[4];
-	static boolean[][] map;
+	static boolean[][] visited = new boolean[30][30];
 	public static void main(String[] args) throws IOException {
 		input = new BufferedReader(new StringReader(src));
 		tokens = new StringTokenizer(input.readLine());
@@ -22,50 +23,33 @@ public class BJ_G5_1405_미친로봇 {
 		for(int i=0; i<4; i++){
 			percent[i] = Integer.parseInt(tokens.nextToken());
 		}
-		permutation(N, new int[N], new boolean[deltas.length]);
 		
-		//System.out.println(cnt/total);
-		
+		visited[15][15] = true;
+		permutation(15, 15, N, 1.0);
+		 
+
+		System.out.println(String.format("%.2f", result));
+		System.out.println(Math.round(result * 100) / 100.0);
 	}
 
 
-	private static void permutation(int toChoose, int[] choosed, boolean[] visited) {
+	private static void permutation(int r, int c, int toChoose, double total) {
 		if(toChoose == 0) {
-			System.out.println(Arrays.toString(choosed));
-			total++;
-			if(find(choosed)) cnt++;
+			result+=total;
+//			System.out.println(result);
 			return;
 		}
 		for (int d = 0; d < 4; d++) {
-			if(!visited[d]) {
-				choosed[choosed.length-toChoose] = d;
-				visited[d] = true;
-				permutation(toChoose-1, choosed, visited);
-				visited[d] = false;
+			int nr = r + deltas[d][0];
+			int nc = c + deltas[d][1];
+			if(!visited[nr][nc]) {
+				visited[nr][nc] = true;
+				
+				permutation(nr, nc, toChoose-1, total * percent[d] * 0.01);
+				visited[nr][nc] = false;
 			}
 		}
 	}
-
-
-	private static boolean find(int[] choosed) {
-		map = new boolean[N][N];
-		int r = 0;
-		int c = 0;
-		for (int i = 0; i < choosed.length; i++) {
-			int nr = r+ deltas[choosed[i]][0];
-			int nc = c+deltas[choosed[i]][1];
-			
-			if(map[nr][nc]) return false; // 단순하지않아
-			
-			else map[nr][nc] = true;
-		
-			r = nr;
-			c = nc;
-		}
-		
-		return true;
-	}
-
 
 	private static String src = "2 25 25 25 25";
 }
