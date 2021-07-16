@@ -14,7 +14,7 @@ public class BJ_G5_1405_미친로봇 {
 	static int N, total, cnt;
 	static int[][] deltas = {{0,1},{0,-1},{-1,0},{1,0}}; //동서남북
 	static int[] percent = new int[4];
-	static int[][] map;
+	static boolean[][] map;
 	public static void main(String[] args) throws IOException {
 		input = new BufferedReader(new StringReader(src));
 		tokens = new StringTokenizer(input.readLine());
@@ -22,10 +22,9 @@ public class BJ_G5_1405_미친로봇 {
 		for(int i=0; i<4; i++){
 			percent[i] = Integer.parseInt(tokens.nextToken());
 		}
-		map = new int[N][N];
 		permutation(N, new int[N], new boolean[deltas.length]);
 		
-		System.out.println(cnt/total);
+		//System.out.println(cnt/total);
 		
 	}
 
@@ -34,7 +33,7 @@ public class BJ_G5_1405_미친로봇 {
 		if(toChoose == 0) {
 			System.out.println(Arrays.toString(choosed));
 			total++;
-			if(find())cnt++;
+			if(find(choosed)) cnt++;
 			return;
 		}
 		for (int d = 0; d < 4; d++) {
@@ -45,7 +44,26 @@ public class BJ_G5_1405_미친로봇 {
 				visited[d] = false;
 			}
 		}
+	}
+
+
+	private static boolean find(int[] choosed) {
+		map = new boolean[N][N];
+		int r = 0;
+		int c = 0;
+		for (int i = 0; i < choosed.length; i++) {
+			int nr = r+ deltas[choosed[i]][0];
+			int nc = c+deltas[choosed[i]][1];
+			
+			if(map[nr][nc]) return false; // 단순하지않아
+			
+			else map[nr][nc] = true;
 		
+			r = nr;
+			c = nc;
+		}
+		
+		return true;
 	}
 
 
