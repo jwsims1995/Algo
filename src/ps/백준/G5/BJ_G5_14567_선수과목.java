@@ -7,7 +7,7 @@ import java.io.StringReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class BJ_G5_14719_빗물 {
+public class BJ_G5_14567_선수과목 {
 	static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	static StringBuilder output = new StringBuilder();
 	static StringTokenizer tokens;
