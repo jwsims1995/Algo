@@ -25,6 +25,14 @@ public class Main {
 			dishArr[n] = Integer.parseInt(input.readLine());
 		}
 		System.out.println(solve());
+		
+		int n =10;
+		String a = Integer.toBinaryString(n);
+		System.out.println(a);
+		
+		String src  = "\"";
+		System.out.println(src);
+	     
 	}
 	
 	static int solve() {
