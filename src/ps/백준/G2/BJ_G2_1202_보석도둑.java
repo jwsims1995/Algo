@@ -73,8 +73,10 @@ public class BJ_G2_1202_보석도둑 {
 		System.out.println(ans);
 	}
 
-	static String src = "2 1\r\n" + 
-			"5 10\r\n" + 
-			"100 100\r\n" + 
-			"11";
+	static String src = "3 2\r\n" + 
+			"1 65\r\n" + 
+			"5 23\r\n" + 
+			"2 99\r\n" + 
+			"10\r\n" + 
+			"2";
 }
