@@ -15,8 +15,6 @@ public class BJ_G2_1202_보석도둑2 {
 
 		@Override
 		public int compareTo(Jewel o) {
-			if (this.price == o.price)
-				return o.price - this.price;
 			return this.weight - o.weight;
 		}
 
