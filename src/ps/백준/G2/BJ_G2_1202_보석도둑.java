@@ -66,6 +66,8 @@ public class BJ_G2_1202_보석도둑 {
 				pq.offer(jewels[cnt++].price);
 			}
 
+			System.out.println(pq);
+			
 			if (!pq.isEmpty())
 				ans += pq.poll();
 		}
