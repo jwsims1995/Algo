@@ -44,22 +44,11 @@ public class BJ_S1_21608_상어초등학교2 {
 			student[n][4] = Integer.parseInt(tokens.nextToken());
 		}
 
+		
+		
 		for (int n = 1; n <= N * N; n++) {
 			int num = student[n][0];
-			if (n == 1) {
-				map[(N + 1) / 2][(N + 1) / 2] = num;
-				visited[(N + 1) / 2][(N + 1) / 2] = true;
-				continue;
-			}
-			sol1(num);
-			if (queue.size() == 1) {
-				Student p = queue.poll();
-				map[p.r][p.c] = num;
-				visited[p.r][p.c] = true;
-				continue;
-			}
-			sol2(num);
-			map[R][C] = num;
+			
 		}
 
 		for (int[] row : map) {
@@ -67,43 +56,6 @@ public class BJ_S1_21608_상어초등학교2 {
 		}
 	}
 
-	static void sol2(int n) {// 1을 만족하는 칸이 여러 개이면, 인접한 칸 중에서 비어있는 칸이 가장 많은 칸으로 자리를 정한다.
-		int max = 0;
-		while (!queue.isEmpty()) {
-			Student p = queue.poll();
-			int cnt = 0;
-			for (int d = 0; d < 4; d++) {
-				int nr = p.r + deltas[d][0];
-				int nc = p.c + deltas[d][1];
-				if (isIn(nr, nc) && map[nr][nc] == 0) {
-					cnt++;
-				}
-			}
-			if (max < cnt) {
-				R = p.r;
-				C = p.c;
-				max = cnt;
-			}
-		}
-	}
-
-	static void sol1(int n) {// 비어있는 칸 중에서 좋아하는 학생이 인접한 칸에 가장 많은 칸으로 자리를 정한다.
-		for (int r = 1; r <= N; r++) {
-			for (int c = 1; c <= N; c++) {
-				for (int d = 0; d < 4; d++) {
-					int nr = r + deltas[d][0];
-					int nc = c + deltas[d][1];
-
-					if (isIn(nr, nc) && !visited[nr][nc]
-							&& (map[nr][nc] == student[n][1] || map[nr][nc] == student[n][2]
-									|| map[nr][nc] == student[n][3] || map[nr][nc] == student[n][4])) {
-						queue.offer(new Student(nr, nc));
-						visited[nr][nc] =  true;
-					}
-				}
-			}
-		}
-	}
 
 	private static boolean isIn(int r, int c) {
 		return 1 <= r && r <= N && 1 <= c && c <= N;
