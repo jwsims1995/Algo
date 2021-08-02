@@ -43,7 +43,7 @@ public class BJ_G5_17129_윌리암슨수액빨이딱따구리가정보섬에올�
 //			System.out.println(Arrays.toString(row));
 //		}//입력확인
 		bfs();
-		
+		 
 		if(ans > 0) {
 			output.append("TAK").append("\n").append(cnt);
 		}
