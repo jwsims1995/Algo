@@ -16,9 +16,6 @@ public class BJ_S1_13022_늑대와올바른단어 {
 		input = new BufferedReader(new StringReader(src));
 				
 		System.out.println(sol()?1:0);
-
-		
-		
 	}
 
 	
