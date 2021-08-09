@@ -20,6 +20,8 @@ public class BJ_G2_4991_로봇청소기 {
 	public static void main(String[] args) throws IOException {
 		input = new BufferedReader(new StringReader(src));
 		while(true) {
+			cnt = 0;
+			dust = 0;
 			tokens = new StringTokenizer(input.readLine());
 			C = Integer.parseInt(tokens.nextToken());
 			R = Integer.parseInt(tokens.nextToken()); 
@@ -36,7 +38,9 @@ public class BJ_G2_4991_로봇청소기 {
 						robotR = r;
 						robotC = c;
 					}
-					else if (map[r][c] =='*') dust++;
+					else if (map[r][c] =='*') {
+						dust++;
+					}
 				}
 			}//입력완료
 			for (char[] row : map) {
@@ -44,12 +48,13 @@ public class BJ_G2_4991_로봇청소기 {
 			}//입력확인
 			cleaning();
 			System.out.println(cnt);
+			System.out.println("cnt: " + cnt);
 		}
 	}
 
 	private static void cleaning() {
 		System.out.println("dust: " + dust);
-		System.out.println("cnt: " + cnt);
+		
 		
 		Queue<Point> queue = new LinkedList<>();
 		queue.add(new Point(robotR, robotC));
