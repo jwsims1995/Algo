@@ -42,7 +42,7 @@ public class BJ_S2_15663_N과M9_2 {
                 sb.append(num).append(" ");
             }
             String str = sb.toString();
-            
+             
             // String 으로 만들고 Set 을 이용하여 중복을 거른다. 
             if(s.contains(str)) return;
             s.add(str);
