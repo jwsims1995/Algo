@@ -33,7 +33,7 @@ public class BJ_S2_15663_N과M9_2 {
         permutation(M, new int[M], 0);
         System.out.print(ans);
     }
-
+ 
     // bitMasking 을 이용한 순열
     public static void permutation(int cnt, int[] selected, int flag){
         if(cnt == 0){
