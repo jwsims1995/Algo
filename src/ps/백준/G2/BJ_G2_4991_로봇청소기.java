@@ -25,58 +25,26 @@ public class BJ_G2_4991_로봇청소기 {
 			tokens = new StringTokenizer(input.readLine());
 			C = Integer.parseInt(tokens.nextToken());
 			R = Integer.parseInt(tokens.nextToken()); 
-			map = new char[R][C];
 			if(C==0 && R==0) {
 				System.out.println(output);
 				return;
 			};
-			for (int r = 0; r < R; r++) {
+			map = new char[R][C];
+			int idx = 1;
+			Point[] info = new Point[11];
+			for(int r =0; r<R; r++) {
 				String line = input.readLine();
-				for (int c = 0; c < C; c++) {
+				for(int c=0 ;c<C; c++) {
 					map[r][c] = line.charAt(c);
-					if(map[r][c]== 'o') {
-						robotR = r;
-						robotC = c;
-					}
-					else if (map[r][c] =='*') {
-						dust++;
-					}
+					if(map[r][c] == 'o') info[0] = new Point(r,c);
+					else if (map[r][c] =='*') info[cnt++] = new Point(r,c);
 				}
 			}//입력완료
-			for (char[] row : map) {
-				System.out.println(Arrays.toString(row));
-			}//입력확인
-			cleaning();
-			System.out.println(cnt);
-			System.out.println("cnt: " + cnt);
+			List<Point> list = new ArrayList<>();
 		}
 	}
 
-	private static void cleaning() {
-		System.out.println("dust: " + dust);
-		
-		
-		Queue<Point> queue = new LinkedList<>();
-		queue.add(new Point(robotR, robotC));
-		boolean[][] visited = new boolean[R][C];
-		visited[robotR][robotC] =  true;
-		while(!queue.isEmpty()) {
-			int size = queue.size();
-			while(size-->0) {
-				Point p = queue.poll();
-				for(int d= 0; d<deltas.length; d++) {
-					int nr = p.r + deltas[d][0];
-					int nc = p.c + deltas[d][1];
-					if(isIn(nr,nc) && !visited[nr][nc]) {
-						visited[nr][nc] = true;
-						queue.add(new Point(nr,nc));
-					}
-				}
-			}
-			cnt++;
-			if(dust==0) return;
-		}
-	}
+
 
 	private static boolean isIn(int r, int c) {
 		return r>=0 && r<R && c>=0 && c<C ;
