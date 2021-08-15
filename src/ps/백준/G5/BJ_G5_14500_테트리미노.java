@@ -44,7 +44,7 @@ public class BJ_G5_14500_테트리미노 {
 			}
 		}
 		System.out.println(max);
-		
+		 
 	}
 
 	private static int findMiddle(int r, int c) {
