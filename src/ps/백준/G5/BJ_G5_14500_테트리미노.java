@@ -59,7 +59,7 @@ public class BJ_G5_14500_테트리미노 {
 				sum+=map[nr][nc];
 				min = Math.min(min, map[nr][nc]);
 			}
-		}
+		} 
 		if(cnt == 4) {
 			return sum-min;
 		}else if(cnt == 3) {
