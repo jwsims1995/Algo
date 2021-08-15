@@ -65,7 +65,7 @@ public class BJ_G5_14500_테트리미노 {
 		}else if(cnt == 3) {
 			return sum;
 		}else {
-			return -1;
+			return -1; 
 		}
 	}
   
