@@ -68,7 +68,7 @@ public class BJ_G5_14500_테트리미노 {
 			return -1;
 		}
 	}
- 
+  
 	private static void check(int r, int c, int step, int sum) {
 		if(step == 4) {
 			max = Math.max(max, sum);
