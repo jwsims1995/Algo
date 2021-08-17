@@ -20,91 +20,91 @@ public class BJ_G2_4991_로봇청소기 {
 	static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	static StringBuilder output = new StringBuilder();
 	static StringTokenizer tokens;
-	static int R,C, robotR, robotC, dust, cnt, ans;
+	static int R,C, minDust;
 	static char[][] map;
 	static int[][] deltas = {{0,1},{0,-1},{1,0},{-1,0}};
+	
 	public static void main(String[] args) throws IOException {
 		input = new BufferedReader(new StringReader(src));
 		while(true) {
-			cnt = 0;
-			dust = 0;
 			tokens = new StringTokenizer(input.readLine());
 			C = Integer.parseInt(tokens.nextToken());
 			R = Integer.parseInt(tokens.nextToken()); 
 			if(C==0 && R==0) {
 				System.out.println(output);
-				return;
-			};
+				System.exit(0);
+			}
+			minDust = Integer.MAX_VALUE;
 			map = new char[R][C];
-			int idx = 1;
-			Point[] info = new Point[11];
+			int dustCnt = 1;
+			Point[] info = new Point[11]; // [0] : 시작점, [1~10] : 먼지 (최대 10개)
 			for(int r =0; r<R; r++) {
 				String line = input.readLine();
 				for(int c=0 ;c<C; c++) {
 					map[r][c] = line.charAt(c);
 					if(map[r][c] == 'o') info[0] = new Point(r,c);
-					else if (map[r][c] =='*') info[idx++] = new Point(r,c);
+					else if (map[r][c] =='*') info[dustCnt++] = new Point(r,c);
 				}
 			}//입력완료
 			
-			//순열 구하기
-//			np(3, new Point[3], 0, info);
-			permutation(3, new Point[3] , new boolean[3] ,info);
-			//최솟값 찾기
-			
-			System.out.println(ans);
-			if(ans == -1 ) return;
+			solution(dustCnt, info);
+			System.out.println(minDust);
 		}
-
 	}
 	
-	private static void permutation(int toChoose, Point[] choosed, boolean[] visited, Point[] info) {
-		if(toChoose == 0) {
-			int size = info.length;
-			cnt = 0;
-			for(int s=1; s<size; s++) {
-				int count = bfs(s, info);
-				if(count == -1) {
-					ans = -1;
+	private static void solution(int dustCnt, Point[] info) {
+		int[][] distance = new int[dustCnt+1][dustCnt+1];
+		for(int i=0; i<dustCnt; i++) { // d[start][end]     start -> end 로 가는 거리 구하기
+			for(int j=i+1; j<dustCnt; j++) {
+				int dist = bfs(info[i], info[j]);
+				if(dist == -1) { // 불가능한 경우
+					minDust = -1;
 					return;
 				}
-				cnt += count;
+				distance[i][j] = distance[j][i] = dist;
 			}
-			ans = Math.min(ans, cnt);
-			return;
 		}
-		for(int i=1; i<info.length; i++) {
-			visited[i] = true;
-			choosed[choosed.length-toChoose] = info[i];
-			permutation(toChoose-1, choosed, visited, info);
-			visited[i] = false;
+		for(int[] row : distance) {
+			System.out.println(Arrays.toString(row));
 		}
+		permutation(0, dustCnt-1, 0,new boolean[dustCnt], dustCnt, distance);
+		
 	}
 
 
 
-	private static int bfs(int idx, Point[] info) {
+
+	private static void permutation(int start, int toChoose, int sum, boolean[] visited, int dustCnt, int[][] distance) {
+		if(toChoose == 0) {
+			minDust = Math.min(minDust, sum);
+			return;
+		}
+		for(int i=1; i<dustCnt; i++) {
+			if(!visited[i]) {
+				visited[i] = true;
+				permutation(i, toChoose-1, sum+distance[start][i], visited, dustCnt, distance);
+				visited[i] = false;
+			}
+		}
+	}
+
+	private static int bfs(Point start, Point end) {
 		Queue<Point> queue = new LinkedList<>();
-		Point start = info[idx-1];
-		System.out.println(start);
-		int toR = info[idx].r;
-		int toC = info[idx].c;
-		int cnt =0;
 		queue.add(start);
 		boolean[][] visited = new boolean[R][C];
-		visited[start.r][start.c]= true;
+		visited[start.r][start.c] = true;
+		int cnt = 0;
 		while(!queue.isEmpty()) {
-			int size=  queue.size();
+			int size = queue.size();
 			while(size-->0) {
 				Point p = queue.poll();
-				if(p.r == toR && p.c == toC) {
-					
+				if(p.r == end.r && p.c == end.c) { //목적지 도달
 					return cnt;
 				}
 				for(int d=0; d<deltas.length; d++) {
 					int nr = p.r + deltas[d][0];
 					int nc = p.c + deltas[d][1];
-					if(isIn(nr,nc) && !visited[nr][nc]) {
+					if(isIn(nr,nc) && !visited[nr][nc] && map[nr][nc] != 'x') {
 						visited[nr][nc] = true;
 						queue.add(new Point(nr,nc));
 					}
@@ -112,10 +112,9 @@ public class BJ_G2_4991_로봇청소기 {
 			}
 			cnt++;
 		}
+		
 		return -1;
 	}
-
-
 
 	private static boolean isIn(int r, int c) {
 		return r>=0 && r<R && c>=0 && c<C ;
