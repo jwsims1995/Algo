@@ -21,38 +21,46 @@ public class BJ_S1_21608_상어초등학교2 {
 
 	static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer tokens;
-	static int N, num, R, C;
-	static int[][] map;
-	static int[][] student;
-	static boolean[][] visited;
+	static int N;
+	
+	static int[][] info;
+	
+	
 	static int[][] deltas = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
 	static Queue<Student> queue = new LinkedList<>();
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		input = new BufferedReader(new StringReader(src));
 		N = Integer.parseInt(input.readLine());
-		map = new int[N + 1][N + 1];
-		student = new int[N * N + 1][5];
-		visited = new boolean[N + 1][N + 1];
-		for (int n = 1; n <= N * N; n++) {
+		info = new int[N*N][5];
+		int[][] map = new int[N][N];
+		for(int i=0; i<N*N; i++) {
 			tokens = new StringTokenizer(input.readLine());
-			student[n][0] = Integer.parseInt(tokens.nextToken()); // 번호
-
-			student[n][1] = Integer.parseInt(tokens.nextToken());
-			student[n][2] = Integer.parseInt(tokens.nextToken());
-			student[n][3] = Integer.parseInt(tokens.nextToken());
-			student[n][4] = Integer.parseInt(tokens.nextToken());
-		}
-
-		
-		
-		for (int n = 1; n <= N * N; n++) {
-			int num = student[n][0];
+			info[i][0] = Integer.parseInt(tokens.nextToken()); //학생 번호
 			
+			info[i][1] = Integer.parseInt(tokens.nextToken()); //좋아하는 학생 번호
+			info[i][2] = Integer.parseInt(tokens.nextToken());
+			info[i][3] = Integer.parseInt(tokens.nextToken());
+			info[i][4] = Integer.parseInt(tokens.nextToken());
 		}
+		int[][] empty = new int[N][N];
+		findEmpty(empty);  // 주변에  빈칸 구하기
+		for(int r=0; r<N; r++) {
+			for(int c=0; c<N; c++) {
+				
+			}
+		}
+		 
+	}
 
-		for (int[] row : map) {
-			System.out.println(Arrays.toString(row));
+
+	private static void findEmpty(int[][] empty) {
+		for(int r=0; r<N; r++) {
+			for(int c=0; c<N; c++) {
+				if(r==0&&c==0 || r==N-1&&c==0 || r==N-1&&c==N-1 || r==0&&c==N-1) empty[r][c] = 2;
+				else if(r==0||r==N-1||c==0||c==N-1) empty[r][c] = 3;
+				else empty[r][c] = 4;
+			}
 		}
 	}
 
