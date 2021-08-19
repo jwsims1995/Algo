@@ -21,14 +21,14 @@ public class BJ_S1_21608_상어초등학교2 {
 
 	static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer tokens;
-	static int N;
+	static int N, setR, setC;
 	
 	static int[][] info;
 	
 	
 	static int[][] deltas = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
 	static Queue<Student> queue = new LinkedList<>();
-
+	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		input = new BufferedReader(new StringReader(src));
 		N = Integer.parseInt(input.readLine());
@@ -45,12 +45,39 @@ public class BJ_S1_21608_상어초등학교2 {
 		}
 		int[][] empty = new int[N][N];
 		findEmpty(empty);  // 주변에  빈칸 구하기
+		int cnt =0;
+		for(int i=0; i<N*N; i++) {
+			go(i, map);
+		}
+
+		
+
+		 
+	}
+
+
+	private static void go(int i, int[][] map) {
+		boolean isExist = false;
 		for(int r=0; r<N; r++) {
 			for(int c=0; c<N; c++) {
+				//1. 비어있는 칸중 인접한 칸에 좋아하는ㅇㅐ가 많을때
+				if(map[r][c] == 0) {
+					//주변에 좋아하는애 몇명?
+					for(int d=0; d<deltas.length; d++) {
+						int nr = r + deltas[d][0];
+						int nc = c + deltas[d][1];
+						if(isIn(nr,nc) && map[nr][nc] == info[i][1] || map[nr][nc] == info[i][2] || map[nr][nc] == info[i][3] || map[nr][nc] == info[i][4]) {
+							setR = r;
+							setC = c;
+							isExist = true;
+						}
+					}
+				}
+				//2. 1을 만족하는게 여러개면 인접중 비어있는게 많은 곳
 				
+				//3. r,c작은순서
 			}
 		}
-		 
 	}
 
 
