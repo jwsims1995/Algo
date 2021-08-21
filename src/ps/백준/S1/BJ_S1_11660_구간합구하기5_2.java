@@ -3,7 +3,7 @@ package ps.백준.S1;
 import java.io.*;
 import java.util.*;
 
-public class BJ_S1_구간합구하기5 {
+public class BJ_S1_11660_구간합구하기5_2 {
 	static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer tokens;
 	static StringBuilder output = new StringBuilder();
@@ -32,9 +32,9 @@ public class BJ_S1_구간합구하기5 {
 			}
 		} // 구간합 구하기
 
-//		for (int[] row : sum) {
-//			System.out.println(Arrays.toString(row));
-//		}
+		for (int[] row : sum) {
+			System.out.println(Arrays.toString(row));
+		}
 
 		for (int m = 0; m < M; m++) {
 			tokens = new StringTokenizer(input.readLine());
@@ -57,5 +57,12 @@ public class BJ_S1_구간합구하기5 {
 
 	}
 
-	static String src = "2 4\r\n" + "1 2\r\n" + "3 4\r\n" + "1 1 1 1\r\n" + "1 2 1 2\r\n" + "2 1 2 1\r\n" + "2 2 2 2";
+	static String src = "4 3\r\n" + 
+			"1 2 3 4\r\n" + 
+			"2 3 4 5\r\n" + 
+			"3 4 5 6\r\n" + 
+			"4 5 6 7\r\n" + 
+			"2 2 3 4\r\n" + 
+			"3 4 3 4\r\n" + 
+			"1 1 4 4";
 }
