@@ -28,20 +28,20 @@ public class BJ_S4_2980_도로와신호등 {
 	static int[][] map;
 	static int time, idx;
 	static boolean isRed;
-	static Light[] light;
+	static Light[] road;
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		input = new BufferedReader(new StringReader(src));
 		tokens = new StringTokenizer(input.readLine());
 		N = Integer.parseInt(tokens.nextToken());
 		L = Integer.parseInt(tokens.nextToken());
-		light = new Light[L+1];
+		road = new Light[L+1];
 		for (int n = 0; n < N; n++) {
 			tokens = new StringTokenizer(input.readLine());
 			D = Integer.parseInt(tokens.nextToken());
 			R = Integer.parseInt(tokens.nextToken());
 			G = Integer.parseInt(tokens.nextToken());
-			light[D] = new Light(R, G);
+			road[D] = new Light(R, G);
 		} // 입력완료
 		
 		
@@ -49,10 +49,10 @@ public class BJ_S4_2980_도로와신호등 {
 			time++;
 			idx++;
 			
-			if(light[idx] != null) { //신호등이 있다면
-				int cnt = time %( light[idx].r + light[idx].r );
+			if(road[idx] != null) { //신호등이 있다면
+				int cnt = time %( road[idx].r + road[idx].g );
 				
-				if(cnt <= light[idx].r) time+= (light[idx].r - cnt);
+				if(cnt <= road[idx].r) time+= (road[idx].r - cnt);
 			}
 		}
 		
