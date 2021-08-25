@@ -12,24 +12,108 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Solution_1868_D4_파핑파핑지뢰찾기 {
+	static class Point{
+		int r, c;
+		public Point(int r, int c) {
+			this.r=r;
+			this.c =c;
+		}
+	}
 	static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	static StringBuilder output = new StringBuilder();
 	static StringTokenizer tokens;
-	
-	
+	static int T, N, ans;
+	static char[][] map;
+	static int[][] deltas= {{0,1},{0,-1},{1,0},{-1,0},
+							{1,1},{1,-1},{-1,1},{-1,-1}};
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		input = new BufferedReader(new StringReader(src));
-		
+		T = Integer.parseInt(input.readLine());
+		for(int t=1; t<=T; t++) {
+			ans = 0;
+			N = Integer.parseInt(input.readLine());
+			map = new char[N][N];
+			for(int r=0; r<N; r++) {
+				map[r] = input.readLine().toCharArray();
+			}
+			System.out.println();
+			for(char[] row: map) {
+				System.out.println(Arrays.toString(row));
+			}
+			
+			for(int r=0; r<N; r++) {
+				for(int c=0; c<N; c++) {
+					if((char)(countMine(r,c) + '0') == '0' && map[r][c] == '.') {
+						change(r,c);
+						ans++;
+					}
+				}
+			}
+			
+			for(int r=0; r<N; r++) {
+				for(int c=0; c<N; c++) {
+					if(map[r][c] == '.') {
+						change(r,c);
+						ans++;
+					}
+				}
+			}
+			System.out.println();
+			for(char[] row: map) {
+				System.out.println(Arrays.toString(row));
+			}
+			output.append("#").append(t).append(" ").append(ans).append("\n");
+		}
+		System.out.println(output);
 	}
 
-	static String src = "10\r\n" + "5 16\r\n" + "3 1 3 5 6\r\n" + "2 10\r\n" + "7 7\r\n" + "3 120\r\n" + "83 64 36\r\n"
-			+ "4 416\r\n" + "299 239 116 128\r\n" + "5 1535\r\n" + "351 228 300 623 954\r\n" + "10 2780\r\n"
-			+ "268 61 201 535 464 168 491 275 578 153\r\n" + "10 1162\r\n"
-			+ "73 857 502 826 923 653 168 396 353 874\r\n" + "15 8855\r\n"
-			+ "3711 576 9081 3280 1413 6818 5142 2981 1266 484 5757 2451 6961 4862 2086\r\n" + "15 57209\r\n"
-			+ "8903 5737 3749 8960 724 6295 1240 4325 8023 3640 2223 639 4161 5330 4260\r\n" + "20 78988\r\n"
-			+ "3811 2307 3935 5052 4936 3473 6432 7032 1560 1992 5332 7000 4020 9344 2732 8815 9924 8998 9540 4640\r\n";
+	private static void change(int r, int c) {
+		Queue<Point> queue =new LinkedList<>();
+		map[r][c] = (char)(countMine(r,c)+'0');
+		if(map[r][c] == '0')queue.add(new Point(r,c));
+		
+		while(!queue.isEmpty()) {
+			Point p = queue.poll();
+			for(int d=0; d<deltas.length; d++) {
+				int nr = p.r + deltas[d][0];
+				int nc = p.c + deltas[d][1];
+				if(isIn(nr,nc) && map[nr][nc] == '.') {
+					map[nr][nc] = (char)(countMine(nr,nc)+'0');
+					if(map[nr][nc] == '0') queue.add(new Point(nr,nc));
+				}
+			}
+		}
+	}
+	
+	private static int countMine(int r, int c) {
+		int cnt =0 ;
+		for(int d=0; d<deltas.length;d++) {
+			int nr= r+deltas[d][0];
+			int nc= c+deltas[d][1];
+			if(isIn(nr,nc) && map[nr][nc] == '*')cnt++;
+		}
+		return cnt;
+	}
+
+	static boolean isIn(int r, int c) {
+		return r>=0 && r<N && c>=0 && c<N; 
+	}
+
+	static String src = "2\n" + 
+			"3\n" + 
+			"..*\n" + 
+			"..*\n" + 
+			"**.\n" + 
+			"5\n" + 
+			"..*..\n" + 
+			"..*..\n" + 
+			".*..*\n" + 
+			".*...\n" + 
+			".*...";
 }
