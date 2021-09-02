@@ -26,7 +26,7 @@ public class BJ_G5_21278_호석이두마리치킨 {
 		distance = new int[N+1][N+1];
 		place = new int[2];
 		//INF로 초기화
-		 
+		  
 		for(int i=1;i<=N;i++) {
 			for(int j=1;j<=N;j++) {
 				if(i==j) continue;
