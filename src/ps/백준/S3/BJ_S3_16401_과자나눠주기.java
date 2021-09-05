@@ -9,35 +9,36 @@ public class BJ_S3_16401_과자나눠주기 {
 	static StringTokenizer tokens;
 	static int M, N;
 	static int ans;
-	static List<Integer> snack = new ArrayList<>();;
+	static int[] snack;
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		input= new BufferedReader(new StringReader(src));
 		tokens = new StringTokenizer(input.readLine());
-		M = Integer.parseInt(tokens.nextToken());
-		N = Integer.parseInt(tokens.nextToken());
+		M = Integer.parseInt(tokens.nextToken()); //조카수
+		N = Integer.parseInt(tokens.nextToken()); //과자갯수
+		snack = new int[M];
 		tokens = new StringTokenizer(input.readLine());
 		for(int n=0;n<N;n++) {
-			snack.add(Integer.parseInt(tokens.nextToken()));
+			snack[n] = Integer.parseInt(tokens.nextToken());
 		}
-		Collections.sort(snack, new Comparator<Integer>() {
-			@Override
-			public int compare(Integer o1, Integer o2) {
-				return o1-o2;
+		Arrays.sort(snack);
+		
+		int start = 1;
+		int end = snack[N-1];
+		while(start <= end) {
+			int mid = (start + end) / 2;
+			int cnt = 0;
+			for(int n=0; n<N;n++) {
+				cnt+=snack[n]/mid;
 			}
-		});
-		if(M<=N) {
-			ans = snack.get(N-M);
-		}
-		else {
-			int divider = (M-1)/N + 1; // 2
-			int min = snack.get(0)/(divider-1); // 10
-			int idx = M%N==0?0:N - (M % N); // 2
-			int tmp = snack.get(idx)/divider; // 15/2 = 7\
-			
-			ans = min>=tmp?tmp:min;
+			if(cnt>=M) {
+				end = mid+1;
+				ans = mid;
+			}else { // cnt < M
+				start = mid - 1;
+			}
 		}
 		System.out.println(ans);
 	}
-	static String src = "11 3\n" + 
-			"10 10 15";
+	static String src = "3 10\n" + 
+			"1 2 3 4 5 6 7 8 9 10";
 }
