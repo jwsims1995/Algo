@@ -34,7 +34,7 @@ public class BJ_G2_17472_다리만들기2 {
 //			System.out.println(Arrays.toString(row));
 //		}//입력확인
 		
-		크루스칼 공부하기
+
 		
 	}
 	static String src = "7 8\r\n" + 

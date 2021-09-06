@@ -18,22 +18,21 @@ public class BJ_S3_15649_N과M_1 {
 	static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	static StringBuilder output = new StringBuilder();
 	static StringTokenizer tokens;
-	static int N,M;
-	
+	static int N, M;
+
 	public static void main(String[] args) throws IOException {
-		
+
 		tokens = new StringTokenizer(input.readLine());
 		N = Integer.parseInt(tokens.nextToken());
 		M = Integer.parseInt(tokens.nextToken());
-		int [] choosed = new int [M];
-		boolean [] visited = new boolean[N];
-		permutation(M, choosed, visited);
+		int[] choosed = new int[M];
+		permutation(M, choosed);
 		////
 		System.out.println(output);
 	}
-	
-	static void permutation(int choose, int[] choosed, boolean[] visited) {
-		if(choose == 0) {
+
+	static void permutation(int choose, int[] choosed) {
+		if (choose == 0) {
 			for (int val : choosed) {
 				output.append(val).append(" ");
 			}
@@ -41,12 +40,9 @@ public class BJ_S3_15649_N과M_1 {
 			return;
 		}
 		for (int i = 0; i < N; i++) {
-			if(!visited[i]) {
-				visited[i]=true;
-				choosed[choosed.length - choose] = i+1;
-				permutation(choose-1, choosed, visited);
-				visited[i] = false;
-			}
+			choosed[choosed.length - choose] = i + 1;
+			permutation(choose - 1, choosed);
 		}
 	}
+
 }
