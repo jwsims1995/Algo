@@ -15,7 +15,7 @@ public class BJ_S3_16401_과자나눠주기 {
 		tokens = new StringTokenizer(input.readLine());
 		M = Integer.parseInt(tokens.nextToken()); //조카수
 		N = Integer.parseInt(tokens.nextToken()); //과자갯수
-		snack = new int[M];
+		snack = new int[N];
 		tokens = new StringTokenizer(input.readLine());
 		for(int n=0;n<N;n++) {
 			snack[n] = Integer.parseInt(tokens.nextToken());
@@ -31,14 +31,14 @@ public class BJ_S3_16401_과자나눠주기 {
 				cnt+=snack[n]/mid;
 			}
 			if(cnt>=M) {
-				end = mid+1;
+				start = mid+1;
 				ans = mid;
 			}else { // cnt < M
-				start = mid - 1;
+				end = mid - 1;
 			}
 		}
 		System.out.println(ans);
 	}
-	static String src = "3 10\n" + 
-			"1 2 3 4 5 6 7 8 9 10";
+	static String src = "4 3\n" + 
+			"10 10 15";
 }
