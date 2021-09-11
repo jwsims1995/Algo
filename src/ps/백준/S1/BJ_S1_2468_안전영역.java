@@ -4,6 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class BJ_S1_2468_안전영역 {
@@ -16,13 +21,29 @@ public class BJ_S1_2468_안전영역 {
 	public static void main(String[] args) throws IOException {
 		input = new BufferedReader(new StringReader(src));
 		N = Integer.parseInt(input.readLine());
-		for(int r=0;r<N; r++) {
-			tokens = new StringTokenizer(input.readLine());
-			for(int c=0;c<N;c++) {
-				map[r][c] = Integer.parseInt(tokens.nextToken());
-			}
-		}
+//		for(int r=0;r<N; r++) {
+//			tokens = new StringTokenizer(input.readLine());
+//			for(int c=0;c<N;c++) {
+//				map[r][c] = Integer.parseInt(tokens.nextToken());
+//			}
+//		}
 		
+		Map<String,Integer> map = new HashMap<>();
+		map.put("hi", map.getOrDefault("hi", 0)+1);
+		map.put("hi", map.getOrDefault("hi", 0)+1);
+		String[] str = {"123", "123"};
+        Set<String> set = new HashSet<>();
+        for(String l : set)
+        
+		for(String c : map.keySet())
+			
+		System.out.println(map);
+        Stack<String> stack = new Stack<>();
+        String.val
+		for(int h=0; h<=N; h++) {
+			
+		}
+
 		
 		
 	}
