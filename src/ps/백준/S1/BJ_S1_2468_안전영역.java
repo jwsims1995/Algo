@@ -19,7 +19,7 @@ public class BJ_S1_2468_안전영역 {
 	static int[][] map;
 	static int N;
 	public static void main(String[] args) throws IOException {
-		input = new BufferedReader(new StringReader(src));
+		input = new BufferedReader(new StringReader(src)); 
 		N = Integer.parseInt(input.readLine());
 //		for(int r=0;r<N; r++) {
 //			tokens = new StringTokenizer(input.readLine());
