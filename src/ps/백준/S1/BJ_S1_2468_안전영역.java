@@ -27,7 +27,7 @@ public class BJ_S1_2468_안전영역 {
 //				map[r][c] = Integer.parseInt(tokens.nextToken());
 //			}
 //		}
-		
+		 
 		Map<String,Integer> map = new HashMap<>();
 		map.put("hi", map.getOrDefault("hi", 0)+1);
 		map.put("hi", map.getOrDefault("hi", 0)+1);
