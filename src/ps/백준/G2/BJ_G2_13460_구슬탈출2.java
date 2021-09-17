@@ -38,21 +38,12 @@ public class BJ_G2_13460_구슬탈출2 {
 		for (int r = 0; r < R; r++) {
 			System.out.println(Arrays.toString(map[r]));
 		} // 입력확인
-		sol();
+		sol(); 
 
 	}
 
 	private static void sol() {
-		while (true) {
-			// R == O 위치 일때
-			
-			// B == O 위치 일때
-			// 못움직일때 break
-			for (int d = 0; d < deltas.length; d++) {
-				tilt(d);
-			}
-		}
-
+		
 	}
 
 	private static void tilt(int d) {
