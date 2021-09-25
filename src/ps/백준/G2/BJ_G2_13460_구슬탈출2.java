@@ -19,8 +19,8 @@ public class BJ_G2_13460_구슬탈출2 {
 	static int R, C, cnt;
 	static char[][] map;
 	static int[][] deltas = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
-	static Point hole;
-
+	static Point hole, blue, red;
+	static boolean[][] visited = new boolean[11][11];
 	public static void main(String[] args) throws IOException {
 		input = new BufferedReader(new StringReader(src));
 		tokens = new StringTokenizer(input.readLine());
@@ -33,21 +33,15 @@ public class BJ_G2_13460_구슬탈출2 {
 				if (map[r][c] == 'O') {
 					hole = new Point(r, c);
 				} // 구멍 찾기
+				else if(map[r][c] == 'R') red = new Point(r,c);
 			}
 		}
 		for (int r = 0; r < R; r++) {
 			System.out.println(Arrays.toString(map[r]));
 		} // 입력확인
-		sol(); 
-
-	}
-
-	private static void sol() {
 		
-	}
+		bfs();
 
-	private static void tilt(int d) {
-		
 	}
 
 	private static boolean isIn(int nr, int nc) {
