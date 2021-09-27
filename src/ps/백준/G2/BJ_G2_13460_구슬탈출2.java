@@ -5,11 +5,14 @@ import java.util.*;
 
 public class BJ_G2_13460_구슬탈출2 {
 	static class Point {
-		int r, c;
+		int redR, redC, blueR, blueC, cnt;
 
-		public Point(int r, int c) {
-			this.r = r;
-			this.c = c;
+		public Point(int redR, int redC, int blueR, int blueC, int c, int cnt) {
+			this.redR = redR;
+			this.redC = redC;
+			this.blueR = blueR;
+			this.blueC = blueC;
+			this.cnt = cnt;
 		}
 	}
 
@@ -19,8 +22,9 @@ public class BJ_G2_13460_구슬탈출2 {
 	static int R, C, cnt;
 	static char[][] map;
 	static int[][] deltas = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
-	static Point hole, blue, red;
-	static boolean[][] visited = new boolean[11][11];
+	static Point blue, red;
+	static int holeR, holeC;
+	static boolean[][][][] visited = new boolean[11][11][11][11];
 	public static void main(String[] args) throws IOException {
 		input = new BufferedReader(new StringReader(src));
 		tokens = new StringTokenizer(input.readLine());
@@ -31,9 +35,11 @@ public class BJ_G2_13460_구슬탈출2 {
 			map[r] = input.readLine().toCharArray();
 			for (int c = 1; c < C - 1; c++) {
 				if (map[r][c] == 'O') {
-					hole = new Point(r, c);
+					holeR = r;
+					holeC = c;
 				} // 구멍 찾기
-				else if(map[r][c] == 'R') red = new Point(r,c);
+				else if(map[r][c] == 'R') red = new Point(r,c,0,0, 0);
+				else if(map[r][c] == 'B') blue = new Point(0,0,r,c, 0);
 			}
 		}
 		for (int r = 0; r < R; r++) {
@@ -42,6 +48,11 @@ public class BJ_G2_13460_구슬탈출2 {
 		
 		bfs();
 
+	}
+
+	private static void bfs() {
+		Queue<Point> queue = new LinkedList<>();
+		queue.add(e)
 	}
 
 	private static boolean isIn(int nr, int nc) {
